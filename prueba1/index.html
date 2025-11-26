@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h2>Cliente WebSocket</h2>
+
+<input id="msg" type="text" placeholder="Escribe algo">
+<button onclick="enviar()">Enviar</button>
+
+<p id="log"></p>
+
+<script>
+    const ws = new WebSocket("ws://localhost:8000");
+
+    ws.onopen = () => {
+        document.getElementById("log").innerText = "Conectado al servidor WebSocket!";
+    }
+
+    ws.onmessage = (ev) => {
+        document.getElementById("log").innerText = ev.data;
+    }
+
+    function enviar() {
+        const texto = document.getElementById("msg").value;
+        ws.send(texto);
+    }
+</script>
+
+</body>
+</html>
